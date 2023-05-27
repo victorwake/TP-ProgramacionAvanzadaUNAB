@@ -1,7 +1,7 @@
 # TP-ProgramacionAvanzadaUNAB
 Trabajo practico para Programacion avanzada Universidad UNAB
 
-3.- Descripción de la Práctica
+Descripción de la Práctica
 Se solicita diseñar e implementar un modelo de negocio a una terminal punto de venta, 
 permitiendo poder cambiar el modelo por el grupo previo autorización del profersor. Esto servirá 
 para estudiar y practicar los mecanismos de la Programación Orientada a Objetos. Se plantearán
