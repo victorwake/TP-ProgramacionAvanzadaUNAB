@@ -18,12 +18,12 @@ public class ConectionSQL {
         return connection;
     }
 
-    public static void closeConnection() throws SQLException {
-        if (connection != null && !connection.isClosed()) {
-            connection.close();
-//            System.out.println("Desconectado de la base de datos");
-        }
-    }
+//    public static void closeConnection() throws SQLException {
+//        if (connection != null && !connection.isClosed()) {
+//            connection.close();
+////            System.out.println("Desconectado de la base de datos");
+//        }
+//    }
 }
 
 

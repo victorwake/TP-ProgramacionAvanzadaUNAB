@@ -1,7 +1,7 @@
 package org.example.service;
 
 import org.example.connectionDb.ConectionSQL;
-import org.example.entity.Cliente;
+
 
 import java.sql.*;
 import java.util.Scanner;
@@ -69,9 +69,9 @@ public class ClienteServices {
 
             System.out.println("===== MENÚ =====");
             System.out.println("1. Ingresar nuevo email");
-            System.out.println("1. Ingresar nuevo telefono");
-            System.out.println("1. Ingresar nuevo celular");
-            System.out.println("1. Ingresar nueva direccion");
+            System.out.println("2. Ingresar nuevo telefono");
+            System.out.println("3. Ingresar nuevo celular");
+            System.out.println("4. Ingresar nueva direccion");
 
             System.out.println("6. Salir");
             System.out.print("Seleccione una opción: ");
