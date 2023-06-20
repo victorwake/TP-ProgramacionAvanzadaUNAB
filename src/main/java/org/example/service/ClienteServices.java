@@ -3,10 +3,12 @@ package org.example.service;
 import org.example.connectionDb.ConectionSQL;
 
 
+
 import java.sql.*;
 import java.util.Scanner;
 
-import static org.example.Main.clearScreen;
+import static org.example.ui.Menu.clearScreen;
+
 
 public class ClienteServices {
     Scanner scanner = new Scanner(System.in);
@@ -22,7 +24,7 @@ public class ClienteServices {
             System.out.println("2. Listar Clientes");
             System.out.println("3. Buscar Cliente");
             System.out.println("4. Actualizar Cliente");
-            System.out.println("6. Salir");
+            System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             int opcion = scanner.nextInt();
 
@@ -49,7 +51,7 @@ public class ClienteServices {
                     menuUpdate();
                     System.out.println(" ");
                     break;
-                case 6:
+                case 0:
                     clearScreen();
                     exit = true;
                     break;
@@ -73,7 +75,7 @@ public class ClienteServices {
             System.out.println("3. Ingresar nuevo celular");
             System.out.println("4. Ingresar nueva direccion");
 
-            System.out.println("6. Salir");
+            System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             int opcion = scanner.nextInt();
 
@@ -110,7 +112,7 @@ public class ClienteServices {
                     actualizarDireccion(clienteId);
                     System.out.println(" ");
                     break;
-                case 6:
+                case 0:
                     clearScreen();
                     exit = true;
                     break;

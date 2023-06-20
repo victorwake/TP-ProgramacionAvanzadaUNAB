@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-import static org.example.Main.clearScreen;
+import static org.example.ui.Menu.clearScreen;
 
 public class TicketServices {
 

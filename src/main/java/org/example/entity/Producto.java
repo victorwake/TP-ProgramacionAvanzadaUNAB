@@ -1,11 +1,5 @@
 package org.example.entity;
 
-import org.example.connectionDb.ConectionSQL;
-
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.List;
-
 public class Producto {
 
     private int productoId;
@@ -63,6 +57,14 @@ public class Producto {
 
     public void setStockProducto(int stockProducto) {
         this.stockProducto = stockProducto;
+    }
+
+    public void limpiarValores() {
+        this.productoId = 0;
+        this.codigoProducto = "";
+        this.nombreProducto = "";
+        this.precioProducto = 0.0;
+        this.stockProducto = 0;
     }
 
 }

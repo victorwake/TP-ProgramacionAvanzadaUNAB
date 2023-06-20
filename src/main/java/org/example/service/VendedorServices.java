@@ -1,6 +1,7 @@
 package org.example.service;
 
 import org.example.connectionDb.ConectionSQL;
+import org.example.entity.Vendedor;
 import org.example.enums.Vendedores;
 
 import java.sql.Connection;
@@ -9,10 +10,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.Scanner;
-import static org.example.Main.clearScreen;
+import static org.example.ui.Menu.clearScreen;
 
 public class VendedorServices {
     Scanner scanner = new Scanner(System.in);
+
     public  void menuVendedores() throws Exception {
         boolean exit = false;
 
@@ -21,7 +23,7 @@ public class VendedorServices {
             System.out.println("===== MENÚ =====");
             System.out.println("1. Obtener nombre de vendedor");
             System.out.println("2. Listar ventas por vendedor");
-            System.out.println("6. Salir");
+            System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
             int opcion = scanner.nextInt();
 
@@ -41,7 +43,7 @@ public class VendedorServices {
                     mostrarVentasPorVendedor(vendedorId);
                     System.out.println(" ");
                     break;
-                case 6:
+                case 0:
                     clearScreen();
                     exit = true;
                     break;

@@ -5,6 +5,8 @@ import java.util.Date;
 public class Venta {
     private int ventaId;
     private Date fecha;
+
+    private String[] productoArray;
     private double totalVendido;
     private Vendedor vendedor;
     private Producto producto;
@@ -14,14 +16,23 @@ public class Venta {
     public Venta() {
     }
 
-    public Venta(int ventaId, Date fecha, double totalVendido, Vendedor vendedor, Producto producto, Servicio servicio, Cliente cliente) {
+    public Venta(int ventaId, Date fecha, String[] productoArray, double totalVendido, Vendedor vendedor, Producto producto, Servicio servicio, Cliente cliente) {
         this.ventaId = ventaId;
         this.fecha = fecha;
+        this.productoArray = productoArray;
         this.totalVendido = totalVendido;
         this.vendedor = vendedor;
         this.producto = producto;
         this.servicio = servicio;
         this.cliente = cliente;
+    }
+
+    public String[] getProductoArray() {
+        return productoArray;
+    }
+
+    public void setProductoArray(String[] productoArray) {
+        this.productoArray = productoArray;
     }
 
     public int getVentaId() {

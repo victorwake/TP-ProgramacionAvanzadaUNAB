@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.Scanner;
 
-import static org.example.Main.clearScreen;
+import static org.example.ui.Menu.clearScreen;
 
 public class VentasServices {
     Scanner scanner = new Scanner(System.in);
@@ -17,7 +17,9 @@ public class VentasServices {
     ClienteServices clienteService = new ClienteServices();
     TicketServices ticketServices = new TicketServices();
 
-    public void menuVenta() throws SQLException {
+    ServicioServices servicioServices = new ServicioServices();
+
+    public void menuVenta() throws Exception {
         boolean exit = false;
 
         while (!exit) {
@@ -25,7 +27,7 @@ public class VentasServices {
             System.out.println("1. crear venta");
             System.out.println("2. Buscar producto");
             System.out.println("3. Crear cliente");
-            System.out.println("6. Salir");
+            System.out.println("0. Salir");
             System.out.print("Seleccione una opción: ");
 
             int opcion = scanner.nextInt();
@@ -34,29 +36,8 @@ public class VentasServices {
             switch (opcion) {
                 case 1:
                     clearScreen();
-                    System.out.println("Ingrese el codigo de producto:");
-                    String codProducto = scanner.nextLine();
-                    int idProducto = obtenerIdProductoPorCodigo(codProducto);
-                    System.out.println("Ingrese la cantidad:");
-                    int cantidad = scanner.nextInt();
-
-                    sumarProduct(codProducto, cantidad);
-
-                    System.out.println("Ingrese el codigo del cliente:");
-                    int codCliente = scanner.nextInt();
-                    System.out.println("Ingrese el codigo del vendedor:");
-                    int codVendedor = scanner.nextInt();
-
-                    int nuevoIdVenta = guardarVenta(codVendedor, idProducto, codCliente);
-                    double precioTotal = sumarProduct(codProducto, cantidad);
-
-                    actualizarTotalVendido(nuevoIdVenta, precioTotal);
-
-                    productoServices.actualizarStockProducto(codProducto, cantidad);
-
-                    ticketServices.mostrarVentaPorId(nuevoIdVenta, cantidad);
-
-
+//                    agregarServicio();
+                    ventaProducto();
                     break;
                 case 2:
                     System.out.println("Ingrese el nombre del producto:");
@@ -67,7 +48,7 @@ public class VentasServices {
                     clearScreen();
                     clienteService.crearCliente();
                     break;
-                case 6:
+                case 0:
                     clearScreen();
                     exit = true;
                     break;
@@ -87,14 +68,14 @@ public class VentasServices {
             Connection conn = ConectionSQL.getConnection();
 
             // Preparar la consulta para obtener el producto por el código
-            String sql = "SELECT nombreProducto, precioProducto FROM producto WHERE codigoProducto = ?";
+            String sql = "SELECT precioProducto FROM producto WHERE codigoProducto = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, codProducto);
 
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                String nombreProducto = rs.getString("nombreProducto");
+//                String nombreProducto = rs.getString("nombreProducto");
                 double precioProducto = rs.getDouble("precioProducto");
 
                 precioTotal = precioProducto * cantidad;
@@ -144,7 +125,6 @@ public int guardarVenta(int vendedorId, int productoId, int clienteId) {
         stmt.close();
         conn.close();
 
-//        System.out.println("Venta guardada correctamente. ID de venta: " + nuevoId);
     } catch (SQLException e) {
         System.out.println("Error al guardar la venta: " + e.getMessage());
     }
@@ -221,4 +201,63 @@ public int guardarVenta(int vendedorId, int productoId, int clienteId) {
             System.out.println("Error al actualizar el total vendido: " + e.getMessage());
         }
     }
+
+    public void agregarServicio() throws Exception {
+        boolean exit = false;
+
+        while (!exit) {
+            System.out.println("1. Desea agregar un servicio?");
+            System.out.println("2. No");
+            System.out.print("Seleccione una opción: ");
+            int opcion = scanner.nextInt();
+
+            switch (opcion) {
+                case 1:
+                    clearScreen();
+                    servicioServices.servicio();
+                    break;
+                case 2:
+                    clearScreen();
+                    exit = true;
+                    break;
+                default:
+                    System.out.println("Opción inválida. Intente nuevamente.");
+                    break;
+            }
+        }
+    }
+
+    public void ventaProducto() throws SQLException {
+        System.out.println("Ingrese el código de producto:");
+//        scanner.nextLine();
+        String codProducto = scanner.nextLine();
+        int idProducto = obtenerIdProductoPorCodigo(codProducto);
+        System.out.println("Ingrese la cantidad:");
+        int cantidad = scanner.nextInt();
+
+        sumarProduct(codProducto, cantidad);
+
+        System.out.println("Ingrese el código del cliente:");
+        int codCliente = scanner.nextInt();
+        System.out.println("Ingrese el código del vendedor:");
+        int codVendedor = scanner.nextInt();
+
+        int nuevoIdVenta = guardarVenta(codVendedor, idProducto, codCliente);
+        double precioTotal = sumarProduct(codProducto, cantidad);
+
+        actualizarTotalVendido(nuevoIdVenta, precioTotal);
+
+        productoServices.actualizarStockProducto(codProducto, cantidad);
+
+        ticketServices.mostrarVentaPorId(nuevoIdVenta, cantidad);
+
+//        System.out.println("¿Desea agregar más productos a la venta? (S/N)");
+//        scanner.nextLine();
+//        String respuesta = scanner.nextLine();
+//        if (respuesta.equalsIgnoreCase("S")) {
+//            ventaProducto(); // Llamada recursiva para agregar más productos
+//        }
+    }
 }
+
+
